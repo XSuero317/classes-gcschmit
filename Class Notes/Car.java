@@ -43,6 +43,16 @@ public class Car
     {
     }
     
+    /**
+     * Constructs a new Car object with the specified fuel efficiency
+     * 
+     * @param   initialEfficiency   the initial fuel efficiency, in
+     *                              miles per gallon, of this new car
+     */
+    public Car(double initialEfficiency)
+    {
+    }
+    
     /*
      * When defining a method, specify:
      *      the visibility (e.g., public)
