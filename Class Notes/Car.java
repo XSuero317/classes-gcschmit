@@ -22,6 +22,7 @@ public class Car
      */
     private double fuelEfficiency; // in units of miles per gallon
     private double fuelInTank;  // in units of gallons
+    private String licensePlate;
 
     /*
      * Constructor:
@@ -41,6 +42,14 @@ public class Car
      */
     public Car()
     {
+        /*
+         * The "this" reserved word references the current object
+         *      (like "self" in Python)
+         *  Its usage is encouraged but usally not required.
+         */
+        this.fuelEfficiency = 30;
+        this.fuelInTank = 0;
+        this.licensePlate = "";
     }
     
     /**
@@ -51,6 +60,19 @@ public class Car
      */
     public Car(double initialEfficiency)
     {
+        /*
+         * If the parameter was named fuelEfficiency, it would
+         *      "shadow" the instance variable fuelEfficiency.
+         *  Local and parameter variables "shadow" instance variables
+         *      of the same name. In this code, fuelEfficiency would
+         *      refer to the parameter and not the instance variable.
+         *  To refer explictly to an instance variable, use "this"
+         *  Advice: avoid this issue by giving parameters unique
+         *      names!
+         */
+        this.fuelEfficiency = initialEfficiency;
+        this.fuelInTank = 0;
+        this.licensePlate = "";
     }
     
     /*
@@ -69,6 +91,7 @@ public class Car
      */
     public void drive(double distance)
     {
+        this.fuelInTank -= ( distance / this.fuelEfficiency );
     }
     
     /**
@@ -79,6 +102,7 @@ public class Car
      */
     public void addFuel(double amount)
     {
+        this.fuelInTank += amount;
     }
     
     /**
@@ -88,6 +112,25 @@ public class Car
      */
     public double getFuelInTank()
     {
-        return 0;
+        return this.fuelInTank;
+    }
+    
+    /**
+     * Sets the license plate of this car to the specified value
+     * 
+     * @param   plate   the licence plate of this car
+     */
+    public void setLicensePlate(String plate)
+    {
+    }
+    
+    /**
+     * Gets the license plate of this car
+     * 
+     * @return the license plate of this car
+     */
+    public String getLicensePlate()
+    {
+        return "";
     }
 }
