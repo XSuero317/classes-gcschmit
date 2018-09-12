@@ -1,5 +1,4 @@
 
-
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -39,13 +38,13 @@ public class CarTest
     public void tearDown()
     {
     }
-    
+
     @Test
     public void testGetFuelInTank()
     {
         Car testCar = new Car();
         double amount = testCar.getFuelInTank();
-        
+
         /*
          * The assertEquals method verifies that the expected value
          *      is equal to the actual (returned) value. If not,
@@ -58,7 +57,7 @@ public class CarTest
          */
         assertEquals(0, amount, 1e-6 /* 1 x 10^-6 */ );
     }
-    
+
     @Test
     public void testAddFuel()
     {
@@ -66,12 +65,12 @@ public class CarTest
         testCar.addFuel(10);
         double amount = testCar.getFuelInTank();
         assertEquals(10, amount, 1e-6);
-        
+
         testCar.addFuel(5);
         amount = testCar.getFuelInTank();
         assertEquals(15, amount, 1e-6);
     }
-    
+
     @Test
     public void testDrive()
     {
@@ -80,12 +79,21 @@ public class CarTest
         testCar.drive(25);
         double amount = testCar.getFuelInTank();
         assertEquals(9.5, amount, 1e-6);
-        
+
         testCar.drive(100);
         amount = testCar.getFuelInTank();
         assertEquals(7.5, amount, 1e-6);
     }
-}
 
+    @Test
+    public void testSetLicensePlate()
+    {
+        Car testCar = new Car();
+        String newPlate = "XYZ123";
+        testCar.setLicensePlate(newPlate);
+        String returnedPlate = testCar.getLicensePlate();
+        assertEquals(newPlate, returnedPlate);
+    }
+}
 
 
