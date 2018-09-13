@@ -89,7 +89,7 @@ public class CarTest
     public void testSetLicensePlate()
     {
         Car testCar = new Car();
-        String newPlate = "XYZ123";
+        String newPlate = new String("COMPSCI1");
         testCar.setLicensePlate(newPlate);
         String returnedPlate = testCar.getLicensePlate();
         assertEquals(newPlate, returnedPlate);

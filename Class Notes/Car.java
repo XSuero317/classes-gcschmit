@@ -49,7 +49,7 @@ public class Car
          */
         this.fuelEfficiency = 30;
         this.fuelInTank = 0;
-        this.licensePlate = "";
+        this.licensePlate = null;
     }
     
     /**
@@ -72,7 +72,7 @@ public class Car
          */
         this.fuelEfficiency = initialEfficiency;
         this.fuelInTank = 0;
-        this.licensePlate = "";
+        this.licensePlate = null;
     }
     
     /*
