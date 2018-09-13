@@ -120,7 +120,7 @@ public class Car
      * 
      * @param   plate   the licence plate of this car
      */
-    public void setLicensePlate(String plate)
+    public void setLicensePlate(String newPlate)
     {
     }
     

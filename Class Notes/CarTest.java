@@ -85,6 +85,14 @@ public class CarTest
         amount = testCar.getFuelInTank();
         assertEquals(7.5, amount, 1e-6);
     }
+    
+    @Test
+    public void testSetLicencePlate()
+    {
+        Car testCar = new Car();
+        testCar.setLicensePlate(new String("COMPSCI1"));
+        String plate = testCar.getLicensePlate();
+    }
 }
 
 
