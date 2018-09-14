@@ -49,7 +49,7 @@ public class Car
          */
         this.fuelEfficiency = 30;
         this.fuelInTank = 0;
-        this.vin = "";
+        this.vin = null;
     }
     
     /**
@@ -72,7 +72,7 @@ public class Car
          */
         this.fuelEfficiency = initialEfficiency;
         this.fuelInTank = 0;
-        this.vin = "";
+        this.vin = null;
     }
     
     /*
@@ -123,7 +123,7 @@ public class Car
      */
     public String getVIN()
     {
-        return "";
+        return this.vin;
     }
     
     /**
@@ -133,6 +133,7 @@ public class Car
      */
     public void setVIN(String newVIN)
     {
+        this.vin = newVIN;
     }
 }
 

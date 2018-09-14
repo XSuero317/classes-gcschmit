@@ -85,6 +85,16 @@ public class CarTest
         amount = testCar.getFuelInTank();
         assertEquals(7.5, amount, 1e-6);
     }
+    
+    @Test
+    public void testSetVIN()
+    {
+        Car testCar = new Car();
+        String vin = new String("V176342FGB45B323A");
+        testCar.setVIN(vin);
+        String returnedVIN= testCar.getVIN();
+        assertEquals(vin, returnedVIN);
+    }
 }
 
 
