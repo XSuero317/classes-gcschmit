@@ -123,7 +123,7 @@ public class Car
      */
     public String getLicensePlate()
     {
-        return "";
+        return this.licensePlate;
     }
     
     /**
@@ -133,5 +133,6 @@ public class Car
      */
     public void setLicensePlate(String plate)
     {
+        this.licensePlate = plate;
     }
 }
