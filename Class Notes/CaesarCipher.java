@@ -10,6 +10,12 @@ import java.util.Scanner;
  */
 public class CaesarCipher
 {
+    /*
+     * static: one value for the variable for all objects of the class;
+     *      can be accessed directly through the class
+     *      (e.g., CaesarCipher.ALPHABET)
+     *      This is like class attributes in Python.
+     */
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     public static void main(String[] args)
@@ -64,6 +70,39 @@ public class CaesarCipher
          *  The nextDouble method behaves in the same way for doubles.
          */
          int secondsPerGuess = s.nextInt();
+    }
+    
+    
+    /**
+     * Formats the average time to crack the cipher based on the
+     *      specified number of seconds and displaysit via System.out
+     *      in several formats.
+     *      
+     *  @param  totalSeconds    the average number of seconds to crack
+     *                          the cipher
+     */
+    public static void printAverageTimeToCrack(long totalSecond)
+    {
+        /*
+         * Instead of using a "magic number" (e.g., 3.14159),use
+         *      constants defined by us or the Java Standard Library.
+         *  
+         *  For example, in the Math class is defined:
+         *  
+         *      public static final double PI = 3.141592654;
+         *  
+         *  Declare a constant with the final keyword.
+         *      If we try to change the value, a compiler error will be
+         *      generated.
+         *  
+         *  By convention, constants are in all caps with underscores.
+         */
+        final int SECONDS_FOR_EVERY_MINUTE = 60;
+        final int MINUTES_FOR_EVERY_HOUR = 60;
+        final int HOURS_FOR_EVERY_DAY = 24;
+        final int DAYS_FOR_EVERY_YEAR = 365;
+        
+        
     }
 
     /**
