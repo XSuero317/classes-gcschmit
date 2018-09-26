@@ -84,7 +84,7 @@ public class CaesarCipher
      *  @param  totalSeconds    the average number of seconds to crack
      *                          the cipher
      */
-    public static void printAverageTimeToCrack(long totalSecond)
+    public static void printAverageTimeToCrack(long totalSeconds)
     {
         /*
          * Instead of using a "magic number" (e.g., 3.14159), use
@@ -104,6 +104,67 @@ public class CaesarCipher
         final int HOURS_FOR_EVERY_DAY = 24;
         final int DAYS_FOR_EVERY_YEAR = 365;
         
+        /*
+         * Use integer division to calculate how many whole minutes
+         *      based on the specified number of seconds.
+         *  
+         *  Integer divison (like // operator in Python) discards the
+         *      remainder (truncates).
+         *  
+         *  Java does integer division when both operands are integers;
+         *      floating-point division when one or both are doubles.
+         *  
+         *  For example:
+         *      3 / 4 = 0 (3 and 4 are integer literals)
+         *      3.0 / 4 = 0.75 (3.0 is a double literal)
+         */
+        long totalMinutes = totalSeconds / SECONDS_FOR_EVERY_MINUTE;
+        
+        /*
+         * Use the modulo (mod, remainder) operator to calculate how many
+         *      seconds remain.
+         *  
+         *  The mod operator (%) returns the remainder of the divison
+         *      operation.
+         *  
+         *  It can be very useful when paired with integer division.
+         *  
+         *  Examples:
+         *      7 % 2 = 1
+         *      11 % 3 = 2
+         *      6 % 2 = 0
+         *  
+         *  % 2 is frequently used to test odd/even (odd => 1; even => 0)
+         */
+        long seconds = totalSeconds % SECONDS_FOR_EVERY_MINUTE;
+        
+        long totalHours = totalMinutes / MINUTES_FOR_EVERY_HOUR;
+        long minutes = totalMinutes % MINUTES_FOR_EVERY_HOUR;
+        
+        long totalDays = totalHours / HOURS_FOR_EVERY_DAY;
+        long hours = totalHours % HOURS_FOR_EVERY_DAY;
+
+        long years = totalDays / DAYS_FOR_EVERY_YEAR;
+        long days = totalDays % DAYS_FOR_EVERY_YEAR;
+        
+        System.out.println("Average time to crack: " + years + " years, " +
+                days + " days, " + hours + " hours, " + minutes + 
+                " minutes, " + seconds + " seconds");
+        
+        /*
+         * A conversion is when a data value is converted from one type
+         *      to another (e.g., int to a double, double to int, 
+         *      int to a long).
+         *      
+         *  Widening: preserves information (e.g., int to a double,
+         *      int to a long)
+         *  Narrowing: lossy, may lose information (e.g., double to a int)
+         *  
+         *  Java automatically performs widening conversion as needed.
+         *  
+         *  This is a widening conversion (i.e., long to double):
+         */
+        double yearsAsDecimal = totalSeconds;
     }
     
     
