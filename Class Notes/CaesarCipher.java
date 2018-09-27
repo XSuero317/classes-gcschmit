@@ -148,15 +148,83 @@ public class CaesarCipher
         long totalHours = totalMinutes / MINUTES_FOR_EVERY_HOUR;
         long minutes = totalMinutes % MINUTES_FOR_EVERY_HOUR;
         
-        long totalDays = 
-        long hours = 
-        
-        long years = 
-        long days = 
+        long totalDays = totalHours / HOURS_FOR_EVERY_DAY;
+        long hours = totalHours % HOURS_FOR_EVERY_DAY;
+
+        long years = totalDays / DAYS_FOR_EVERY_YEAR;
+        long days = totalDays % DAYS_FOR_EVERY_YEAR;
         
         System.out.println("Average time to crack: " + years + " years, " +
                 days + " days, " + hours + " hours, " + minutes +
                 " minutes, " + seconds + " seconds");
+        
+        /*
+         * A conversion is when a data value is converted from one type
+         *      to another (e.g., int to a double, double to an int,
+         *      int to a long).
+         *  
+         *  Widening: preserves information (e.g., int to a double, int to
+         *      a long).
+         *  Narrowing: lossy; may lose information (e.g., double to an int)
+         *  
+         *  Java only automatically performs widening conversions.
+         *  
+         *  This is a widening conversion (i.e., long to a double).
+         */
+        double yearsAsDecimal = totalSeconds;
+        /*
+         * Arthimetic Promotion
+         * 
+         *  If the two operands are of different types, Java attempts to
+         *      promote one of the types (widening conversion) and then
+         *      performs the operation.
+         *      
+         *  In this case, both SECONDS_FOR_EVERY_MINUTE and
+         *      MINUTES_FOR_EVERY_HOUR are ints; so; Java doesn't perform
+         *      any promotion and, instead, performs the multiplication
+         *      and stores the result as an int. Only after all three
+         *      multiplications does Java promote the int value of the
+         *      resulting product to a long and then assign it to
+         *      SECONDS_FOR_EVERY_YEAR.
+         *      
+         *      This promotion may be too late! If the multiplication
+         *      overflows an int, the wrong value will be promoted to a
+         *      long and stored.
+         */
+        final long SECONDS_FOR_EVERY_YEAR = SECONDS_FOR_EVERY_MINUTE *
+                MINUTES_FOR_EVERY_HOUR * HOURS_FOR_EVERY_DAY *
+                DAYS_FOR_EVERY_YEAR;
+        
+        /*
+         * In this example, the value of SECONDS_FOR_EVERY_YEAR is promoted
+         *      to a double and then floating-point division is performed
+         *      and assigned to yearsAsDecimal.
+         *  
+         *  The local variable SECONDS_FOR_EVERY_YEAR is still a long and
+         *      sill has the same value.
+         */
+        yearsAsDecimal = yearsAsDecimal / SECONDS_FOR_EVERY_YEAR;
+        
+        System.out.println("or " + yearsAsDecimal + " years");
+        
+        /*
+         * To force a narrowing conversion, use the cast operator. A cast
+         *      is the "I know what I'm doing; trust me" conversion.
+         *  
+         *  (int)(84.69) => truncates to an int (84)
+         *  
+         *  If we want to round a double to the nearest int value, use
+         *      the Math.round method:
+         *      
+         *      public static long round(double value)
+         *      public static int round(float value)
+         *      
+         *  The following divides yearsAsDecimal by 10, then rounds
+         *      the resulting double value to the nearest decade, and then
+         *      casts the resulting long to an int.
+         */
+        int decades = (int)(Math.round(yearsAsDecimal / 10));
+        System.out.println("or about " + decades + " decades");
     }
     
     /**
