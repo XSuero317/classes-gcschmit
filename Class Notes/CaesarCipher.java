@@ -80,6 +80,16 @@ public class CaesarCipher
      * Formats the average time to crack the cipher based on the specified
      *      number of seconds and displays via System.out in several
      *      formats.
+     *      
+     *  This method is static and is independent of the state of a
+     *      CaesarCipher object. As a result, this method may be invoked
+     *      on the class instead of on a variable that references an
+     *      object:
+     *      
+     *      CaesarCipher.printAverageTimeToCrack(10000000000L);
+     *  
+     *  In addition, static methods cannot access any instance variables.
+     *      They can only access static class variables.
      *  
      *  @param  totalSeconds    the average number of seconds to crack
      *                          the cipher
@@ -165,6 +175,58 @@ public class CaesarCipher
          *  This is a widening conversion (i.e., long to double):
          */
         double yearsAsDecimal = totalSeconds;
+        
+        /*
+         * Arthimetic Promotion
+         * 
+         *  If the two operands are of different types, Java attempts
+         *      to promote one of the types (widening conversion) and
+         *      then perform the operation.
+         * 
+         *  In this case, both SECONDS_FOR_EVERY_MINUTE and 
+         *      MINUTES_FOR_EVERY_HOUR are ints; so, Java doesn't perform
+         *      any promotion and, instead, performs the multiplication
+         *      and stores the result in an int. Only after all three
+         *      multiplications does Java promote the int-value of the
+         *      resulting product to a long and then assigns it to
+         *      SECONDS_FOR_EVERY_YEAR. This promotion may be too late.
+         *      If the multiplication overflows an int, the wrong value
+         *      will be promoted to a long and stored.
+         */
+        final long SECONDS_FOR_EVERY_YEAR = SECONDS_FOR_EVERY_MINUTE *
+                MINUTES_FOR_EVERY_HOUR * HOURS_FOR_EVERY_DAY *
+                DAYS_FOR_EVERY_YEAR;
+        
+        /*
+         * In this example, the value of SECONDS_FOR_EVERY_YEAR is promoted
+         *      to a double and then floating-point division is performed
+         *      and the result is assigned to yearsAsDecimal.
+         *      
+         *      The local variable SECONDS_FOR_EVERY_YEAR is still a long
+         *      and has the same value.
+         */
+        yearsAsDecimal = yearsAsDecimal / SECONDS_FOR_EVERY_YEAR;
+        
+        System.out.println("or " + yearsAsDecimal + " year");
+        
+        /*
+         * To force a narrowing conversion, use the cast operator. A
+         *      cast is the "I know what I'm doing; trust me" conversion.
+         *      
+         *  (int)(84.69) => truncates to an int (84)
+         *  
+         *  If we want to round a double to the nearest int value, use the
+         *      Math.round static method:
+         *      
+         *      public static long round(double value)
+         *      public static int round(float value)
+         *  
+         *  The following divides yearsAsDecimal by 10, then rounds
+         *      the resulting double value to the nearest decade, and then
+         *      casts the resulting long to an int.
+         */
+        int decades = (int)(Math.round(yearsAsDecimal / 10));
+        System.out.println("or about " + decades + " decades");
     }
     
     
