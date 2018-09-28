@@ -73,6 +73,18 @@ public class CaesarCipher
          */
         int secondsPerGuess = s.nextInt();
         
+        
+        /*
+         * The Math.random static methods returns a double [0.0 ... 1.0)
+         * 
+         *  Often we use the following algorithm to generate a random
+         *      integer from min (inclusive) to max (inclusive)
+         *      
+         *      int n = (int)((Math.random() * (max - min + 1)) + min);
+         *  
+         *  For example: generate a random int [1 ... 26]:
+         */
+        int letterIndex = (int)((Math.random() * 26) + 1);
     }
     
     
