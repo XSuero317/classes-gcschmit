@@ -15,6 +15,10 @@ public class CaesarCipher
      *      can be accessed directly through the class
      *      (e.g., CaesarCipher.ALPHABET)
      *      This is like class attributes in Python.
+     *      
+     *  "ABCDEFGHIJKLMNOPQRSTUVWXYZ" is a String literal
+     *  It is equivalent to:
+     *      new String("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
      */
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
@@ -71,6 +75,18 @@ public class CaesarCipher
          */
          int secondsPerGuess = s.nextInt();
          
+         
+         // prepare the keyphrase by removing duplicate letters
+         keyphrase = CaesarCipher.compressKeyphrase(keyphrase);
+         
+         long averageTimeToCrack = CaesarCipher.calculateAverageTimeToCrack(
+                keyphrase.length(), secondsPerGuess);
+         
+         CaesarCipher.printAverageTimeToCrack(averageTimeToCrack);
+         
+         String encryptedText = CaesarCipher.encrypt(text, keyphrase);
+         System.out.println("Encrypted: " + encryptedText);
+                
          /*
           * Generate a random number between 1 and 26 using th
           *     Math.random method.
@@ -222,6 +238,85 @@ public class CaesarCipher
         int decades = (int)(Math.round(yearsAsDecimal / 10));
         
         System.out.println("or about " + decades + " decades");
+    }
+    
+    /**
+     * Compresses the specified keyphrase by removing any duplicate letters.
+     * 
+     * @param   keyphrase   the keyphrase to compress
+     * @return  the keyphrase with all duplicate letters removed
+     */
+    public static String compressKeyphrase(String keyphrase)
+    {
+        String compressedKeyphrase = "";
+        
+        /*
+         * length
+         *      returns the number of characters in the string
+         */
+        int keyPhraseLength = keyphrase.length();
+        
+        for(int i = 0; i < keyPhraseLength; i++)
+        {
+            /*
+             * charAt
+             *      returns the character (of type char) at the specified
+             *          index (0-based)
+             *  
+             *  C A E S A R
+             *  0 1 2 3 4 5     <- indicies
+             *  
+             *  length = 6
+             */
+            char letter = keyphrase.charAt(i);
+            
+            /*
+             * substring
+             *      returns part of the string starting at the first index
+             *          up to, but not including, the second index
+             *      if only one index is specified, returns part of the
+             *          string starting at the index through the end
+             *          of the string
+             *          
+             *  C A E S A R
+             *  0 1 2 3 4 5     <- indicies
+             *  
+             *  length = 6
+             */
+            String restOfKeyphrase = keyphrase.substring(i+1);
+            // could also be:
+            // String restOfKeyphrase = keyphrase.substring(i+1,
+            //                              keyphrase.length());
+            
+            /*
+             * indexOf
+             *      returns the index of the start of the first occurence
+             *          of the specified string
+             *      if not found, returns -1
+             *      
+             *  A E S A R
+             *  0 1 2 3 4     <- indicies
+             *  
+             *  length = 5
+             */
+            int index = restOfKeyphrase.indexOf(letter);
+            
+            /*
+             * String concatenation
+             *      + is the string concatentation operator
+             *      concatenates the second string operand to the end of
+             *          the first string operand
+             *      if one or both operands are Strings, + is the string
+             *          concatenation operator (operands are converted to
+             *          Strings); otherwise, + is the addition operator
+             */
+            if(index == -1)
+            {
+                compressedKeyphrase = compressedKeyphrase + letter;
+            }
+        }
+        
+        return compressedKeyphrase;
     }
 
     /**
